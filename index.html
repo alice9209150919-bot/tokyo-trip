@@ -1043,6 +1043,194 @@
       cursor: pointer;
     }
 
+    /* =========================================
+       隨身票券夾 (Ticket & QR Code Wallet)
+    ========================================= */
+    .wallet-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 580px) {
+      .wallet-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .ticket-card {
+      background-color: var(--white);
+      border: var(--border-w) solid var(--ink-gray);
+      border-radius: 20px;
+      box-shadow: var(--shadow-hard);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .ticket-head {
+      padding: 9px 14px;
+      border-bottom: 2.5px solid var(--ink-gray);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 0.84rem;
+    }
+
+    .ticket-body {
+      padding: 13px 14px;
+      flex: 1;
+    }
+
+    .ticket-title {
+      font-size: 1.02rem;
+      margin-bottom: 4px;
+      color: var(--ink-gray);
+    }
+
+    .ticket-note {
+      font-size: 0.86rem;
+      line-height: 1.45;
+      color: var(--ink-gray);
+    }
+
+    .ticket-thumb-wrap {
+      margin-top: 10px;
+      border: 2.5px solid var(--ink-gray);
+      border-radius: 14px;
+      overflow: hidden;
+      background-color: var(--bg-washi);
+      cursor: pointer;
+      position: relative;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ticket-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ticket-thumb-hint {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      background-color: var(--yamabuki);
+      border: 2px solid var(--ink-gray);
+      border-radius: var(--radius-pill);
+      padding: 2px 9px;
+      font-size: 0.74rem;
+      box-shadow: 1.5px 1.5px 0 var(--ink-gray);
+    }
+
+    .ticket-foot {
+      border-top: 2.5px dashed var(--ink-gray);
+      background-color: var(--bg-washi);
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .ticket-btn {
+      font-family: inherit;
+      font-size: 0.8rem;
+      color: var(--ink-gray);
+      background-color: var(--white);
+      border: 2px solid var(--ink-gray);
+      border-radius: var(--radius-pill);
+      padding: 4px 10px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 1.5px 1.5px 0 var(--ink-gray);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .ticket-btn.t-zoom { background-color: var(--yamabuki); }
+    .ticket-btn.t-link { background-color: var(--mizu-blue); }
+    .ticket-btn.t-del { background-color: var(--coral-pink); }
+
+    .upload-ticket-btn {
+      margin-top: 14px;
+      width: 100%;
+      font-family: inherit;
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--ink-gray);
+      background-color: var(--mizu-blue);
+      border: var(--border-w) solid var(--ink-gray);
+      border-radius: var(--radius-pill);
+      padding: 12px 16px;
+      cursor: pointer;
+      box-shadow: var(--shadow-hard);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .upload-ticket-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 var(--ink-gray);
+    }
+
+    /* 全螢幕 QR Code 亮碼檢視燈箱 */
+    .qr-lightbox {
+      position: fixed;
+      inset: 0;
+      background-color: #FFFFFF;
+      z-index: 900;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .qr-lightbox.open {
+      display: flex;
+    }
+
+    .qr-lightbox-img {
+      max-width: 100%;
+      max-height: 70vh;
+      border: 3px solid var(--ink-gray);
+      border-radius: 16px;
+      object-fit: contain;
+      background-color: #FFFFFF;
+    }
+
+    .qr-lightbox-title {
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+      color: var(--ink-gray);
+    }
+
+    .qr-lightbox-close {
+      margin-top: 18px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink-gray);
+      background-color: var(--coral-pink);
+      border: 3px solid var(--ink-gray);
+      border-radius: var(--radius-pill);
+      padding: 10px 26px;
+      cursor: pointer;
+      box-shadow: var(--shadow-hard);
+    }
+
     /* 輕量提示浮標 (Toast) */
     .toast {
       position: fixed;
@@ -1171,8 +1359,9 @@
       <nav class="nav-scroll" aria-label="主要導覽">
         <a href="#sec-flights" class="nav-pill p-blue">航班</a>
         <a href="#sec-itinerary" class="nav-pill p-pink">行程</a>
+        <a href="#sec-tickets" class="nav-pill p-yellow">票券夾</a>
         <a href="#sec-stay" class="nav-pill p-green">住宿</a>
-        <a href="#sec-lists" class="nav-pill p-yellow">清單</a>
+        <a href="#sec-lists" class="nav-pill">清單</a>
         <button type="button" id="motion-toggle-btn" class="nav-pill" onclick="toggleMotion()">動態：開</button>
       </nav>
     </div>
@@ -1422,7 +1611,30 @@
     </section>
 
     <!-- =====================================
-         4. 住宿資訊卡片 (Accommodation)
+         4. 隨身票券與 QR Code 抽屜 (Ticket Wallet)
+    ====================================== -->
+    <section id="sec-tickets" class="section">
+      <div class="section-header">
+        <div class="section-badge bg-yellow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
+            <path d="M13 5v2"/>
+            <path d="M13 17v2"/>
+            <path d="M13 11v2"/>
+          </svg>
+        </div>
+        <h2 class="section-title">隨身票券夾（支援上傳 QR Code）</h2>
+      </div>
+
+      <div id="ticket-wallet-grid" class="wallet-grid"></div>
+
+      <button type="button" class="upload-ticket-btn" onclick="openTicketModal()">
+        ＋ 上傳門票 / QR Code 截圖（自動離線儲存）
+      </button>
+    </section>
+
+    <!-- =====================================
+         5. 住宿資訊卡片 (Accommodation)
     ====================================== -->
     <section id="sec-stay" class="section">
       <div class="section-header">
@@ -1445,8 +1657,8 @@
 
         <div class="hotel-meta">
           <div>📅 <strong>入住期間</strong>：2026/11/15 (日) – 11/19 (四)</div>
-          <div>⏰ <strong>入住／退房</strong>：16:00 後自助密碼鎖入住 ／ 10:00 前退房</div>
-          <div>🧳 <strong>行李寄放對策</strong>：民宿無櫃檯寄放服務；Day 1 已預約「7-Eleven 高田馬場4丁目南店」ecbo cloak 寄放行李；Day 5 退房直接寄放京成上野／日暮里車站置物櫃。</div>
+          <div>⏰ <strong>入住／退房</strong>：16:00 後自助密碼鎖入住 ／ 10:00 前退房（<strong>Day 5 提前於 06:00 退房</strong>）</div>
+          <div>🧳 <strong>行李寄放對策</strong>：民宿無櫃檯寄放服務；Day 1 已預約「7-Eleven 高田馬場4丁目南店」ecbo cloak 寄放行李；Day 5 早上 06:25 退房直接寄放「新宿站南口／西口」大型置物櫃。</div>
         </div>
 
         <div class="hotel-actions">
@@ -1593,7 +1805,7 @@
         <button type="button" class="modal-close" onclick="closeResetConfirmModal()" aria-label="關閉">✕</button>
       </div>
       <p style="font-size: 0.94rem; margin-bottom: 16px;">
-        此操作將會清除您手動修改或新增的行程項目，並恢復為最初規劃的 5 天完整版本喔！
+        此操作將會清除您手動修改或新增的行程項目，並恢復為最新確認的 5 天完整版本喔！
       </p>
       <div class="modal-footer">
         <button type="button" class="modal-btn bg-white" onclick="closeResetConfirmModal()">先不要</button>
@@ -1602,12 +1814,73 @@
     </div>
   </div>
 
+  <!-- =====================================
+       新增票券 / QR Code 截圖彈窗 (Modal)
+  ====================================== -->
+  <div id="ticket-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="ticket-modal-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="ticket-modal-title" class="modal-title">🎫 新增票券 / QR Code 截圖</h3>
+        <button type="button" class="modal-close" onclick="closeTicketModal()" aria-label="關閉彈窗">✕</button>
+      </div>
+      <form id="ticket-form" onsubmit="saveTicketForm(event)">
+        <div class="form-field">
+          <label class="form-label" for="tk-title">📌 票券名稱（必填）</label>
+          <input type="text" id="tk-title" class="form-input" required placeholder="例如：東京海洋迪士尼門票 QR Code" />
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-field">
+            <label class="form-label" for="tk-day">📅 使用日期標籤</label>
+            <input type="text" id="tk-day" class="form-input" placeholder="例如：Day 2 (11/16)" />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="tk-color">🎨 卡片色系</label>
+            <select id="tk-color" class="form-select">
+              <option value="bg-blue">水色</option>
+              <option value="bg-pink">珊瑚粉</option>
+              <option value="bg-yellow">山吹黃</option>
+              <option value="bg-green">若竹綠</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="tk-note">📝 憑證編號 / 座位 / 備註</label>
+          <input type="text" id="tk-note" class="form-input" placeholder="例如：訂單號 #123456、2人全票" />
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="tk-url">🔗 訂單網址連結（選填）</label>
+          <input type="url" id="tk-url" class="form-input" placeholder="https://www.klook.com/..." />
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="tk-image">🖼️ 選擇手機相簿 QR Code 截圖（選填，自動壓縮離線存檔）</label>
+          <input type="file" id="tk-image" class="form-input" accept="image/*" />
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="modal-btn bg-white" onclick="closeTicketModal()">取消</button>
+          <button type="submit" id="tk-submit-btn" class="modal-btn bg-yellow">儲存至票券夾 🎫</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 全螢幕 QR Code 亮碼檢視燈箱 -->
+  <div id="qr-lightbox" class="qr-lightbox" role="dialog" aria-modal="true" onclick="closeQrLightbox()">
+    <div id="qr-lightbox-title" class="qr-lightbox-title"></div>
+    <img id="qr-lightbox-img" class="qr-lightbox-img" src="" alt="票券 QR Code 放大檢視" onclick="event.stopPropagation()" />
+    <button type="button" class="qr-lightbox-close" onclick="closeQrLightbox()">關閉放大檢視 ✕</button>
+  </div>
+
   <!-- 輕量提示浮標 (Toast) -->
   <div id="toast" class="toast" role="status"></div>
 
   <script>
     /* =========================================
-       1. 預設 5 天完整行程資料庫 (深拷貝基準)
+       1. 預設 5 天完整行程資料庫 (最終最新異動版)
     ========================================= */
     const DEFAULT_ITINERARY = {
       1: {
@@ -1617,7 +1890,7 @@
           {
             time: "10:55 - 12:40",
             title: "成田 T1 入境 ➔ 高田馬場站",
-            desc: "酷航 TR866 降落成田第一航廈，入境領行李後搭京成 Skyliner 至日暮里，轉 JR 山手線（14分鐘）直達高田馬場站。",
+            desc: "酷航 TR866 降落成田第一航廈，入境領行李後搭京成 Skyliner 至日暮里（36分），轉 JR 山手線（14分）直達高田馬場站。",
             highlight: false,
             tagText: "Skyliner+山手線",
             tagColor: "t-blue"
@@ -1641,7 +1914,7 @@
           {
             time: "14:40 - 15:45",
             title: "原宿・貓街潮牌與球鞋散策",
-            desc: "集中踩點 Human Made Harajuku、On Tokyo 跑鞋旗艦店、atmos BLUE 表參道。",
+            desc: "集中踩點 Human Made Harajuku、On Tokyo 跑鞋旗艦店、atmos BLUE 表參道、KITH TOKYO。",
             highlight: true,
             tagText: "徒步散策",
             tagColor: "t-green"
@@ -1672,8 +1945,8 @@
           },
           {
             time: "20:30 - 22:00",
-            title: "【晚餐】牛たん 檸檬 新宿本店",
-            desc: "已預約 20:30！極上厚切炭烤牛舌定食配檸檬片、生蛋黃拌飯與牛尾湯，餐後搭山手線 4 分鐘回高田馬場休息。",
+            title: "【晚餐】牛たん 檸檬 新宿本店〔已預約 20:30〕",
+            desc: "極上厚切炭烤牛舌定食配檸檬片、生蛋黃拌飯與牛尾湯，餐後搭山手線 4 分鐘回高田馬場休息。",
             highlight: true,
             tagText: "大江戶線直達",
             tagColor: "t-blue"
@@ -1695,7 +1968,7 @@
           {
             time: "08:50 - 10:00",
             title: "入園購 DPA ＆【必玩 1】地心探險之旅",
-            desc: "刷票入園第一秒即買「翱翔」DPA（¥2,000），直衝神秘島地心探險之旅（目前已無免費 Standby Pass）。",
+            desc: "夢幻泉鄉免抽免費 Standby Pass 自由入園；刷票入園第一秒即買「翱翔」DPA（¥2,000），直衝神秘島地心探險之旅。",
             highlight: true,
             tagText: "App 搶票+步行",
             tagColor: "t-pink"
@@ -1751,15 +2024,15 @@
         ]
       },
       3: {
-        title: "Day 3（11/17 週二）築地尋鮮・小網洗錢・淺草抹茶・SHIBUYA SKY夕陽",
+        title: "Day 3（11/17 週二）築地・小網洗錢・淺草抹茶・SHIBUYA SKY ➔ 21:30 肉男",
         bannerColor: "bg-yellow",
         items: [
           {
             time: "09:15 - 10:45",
             title: "【早午餐】築地場外市場",
-            desc: "啟用 Tokyo Subway 24H 券（¥800），品嚐山長現煎玉子燒、黑毛和牛海膽串、滿料綜合海鮮丼。",
+            desc: "可刷西瓜卡或啟用 Tokyo Subway 24H 券，品嚐山長現煎玉子燒、黑毛和牛海膽串、滿料綜合海鮮丼。",
             highlight: true,
-            tagText: "地鐵24H券",
+            tagText: "東西線轉日比谷線",
             tagColor: "t-yellow"
           },
           {
@@ -1771,119 +2044,143 @@
             tagColor: "t-yellow"
           },
           {
-            time: "12:30 - 14:15",
-            title: "淺草寺・雷門 ＆ 仲見世通",
-            desc: "經典雷門大燈籠合影、逛仲見世通商店街、至本堂參拜抽籤祈福。",
+            time: "12:30 - 15:15",
+            title: "淺草寺・雷門 ➔ 八十八良葉舍抹茶",
+            desc: "雷門大燈籠合影參拜，外帶八十八良葉舍現刷特濃抹茶拿鐵與抹茶布丁，漫步隅田川水岸拍晴空塔。",
             highlight: true,
             tagText: "都營淺草線",
             tagColor: "t-yellow"
           },
           {
-            time: "14:15 - 15:15",
-            title: "【甜點】八十八良葉舍 淺草店",
-            desc: "現刷特濃抹茶拿鐵與抹茶布丁，外帶漫步至隅田川水岸遠眺晴空塔合影。",
-            highlight: true,
-            tagText: "隅田川散策",
-            tagColor: "t-green"
-          },
-          {
             time: "16:20 - 18:00",
             title: "SHIBUYA SKY 夕陽與百萬夜景",
-            desc: "搶 16:20/16:40 日落場次，47 樓露天無邊際平台俯瞰日落富士山剪影與澀谷十字路口夜景。",
+            desc: "銀座線直達澀谷，47 樓露天無邊際平台俯瞰日落富士山剪影、魔幻藍調與澀谷十字路口夜景。",
             highlight: true,
             tagText: "銀座線直達澀谷",
             tagColor: "t-yellow"
           },
           {
-            time: "18:00 - 19:20",
-            title: "澀谷精品化妝品 ＆ 連鎖品牌採買",
-            desc: "逛 Scramble Square / Hikarie 精品美妝專櫃、UNIQLO、3COINS +plus 選購日系雜貨。",
+            time: "18:00 - 21:15",
+            title: "澀谷商圈黃金大採買（百貨關門前 3 小時衝刺）",
+            desc: "逛 Scramble Square / Hikarie 精品化妝品專櫃（直接退稅）、UNIQLO、無印良品 (MUJI)、3COINS +plus。",
             highlight: true,
             tagText: "澀谷商圈步行",
             tagColor: "t-green"
           },
           {
-            time: "19:30 - 21:15",
-            title: "【晚餐】山笑ふ 表參道店",
-            desc: "已預約 19:30！個人吧台專屬銅鍋極上黑毛和牛壽喜燒套餐，餐後搭山手線回高田馬場民宿。",
+            time: "21:30 - 23:15",
+            title: "【晚餐/宵夜】肉男 MEAT MAN 澀谷店〔已預約 21:30〕",
+            desc: "逛完街直接大口吃鐵板肉男牛排、起司番茄肉捲串燒與特調酒飲，餐後搭 JR 山手線 12 分鐘回高田馬場。",
             highlight: true,
-            tagText: "銀座線1站/步行",
-            tagColor: "t-yellow"
+            tagText: "徒步前往",
+            tagColor: "t-pink"
           }
         ]
       },
       4: {
-        title: "Day 4（11/18 週三）富士山一日遊 ➔ 澀谷百貨採買 ➔ 21:30 肉男大餐",
+        title: "Day 4（11/18 週三）雨天全室內購物大採買日 ➔ 19:30 山笑ふ和牛壽喜燒",
         bannerColor: "bg-green",
         items: [
           {
-            time: "08:00 - 18:00",
-            title: "Klook 富士山 10 小時專車一日遊",
-            desc: "新宿西口集合出發！造訪新倉山淺間公園五重塔、山梨餺飥麵午餐、河口湖楓葉迴廊、日川時計店。",
+            time: "10:30 - 12:30",
+            title: "上野・御徒町室內採買：西松屋",
+            desc: "因應天氣調整為全室內逛街日！前往西松屋（上野御徒町 / 多慶屋周邊）集中採買母嬰童裝用品。",
             highlight: true,
-            tagText: "新宿西口集合專車",
-            tagColor: "t-pink"
-          },
-          {
-            time: "18:45 - 21:15",
-            title: "澀谷商圈黃金大採買（百貨關門前衝刺）",
-            desc: "趁百貨打烊前集中掃貨精品化妝品專櫃、UNIQLO、無印良品 (MUJI)、3COINS +plus、松本清藥妝（帶護照辦退稅）。",
-            highlight: true,
-            tagText: "JR山手線5分鐘",
+            tagText: "JR山手線",
             tagColor: "t-blue"
           },
           {
-            time: "21:30 - 23:15",
-            title: "【晚餐】肉男 MEAT MAN 澀谷店",
-            desc: "已預約 21:30！大口吃鐵板肉男牛排、起司番茄肉捲串燒與特調酒飲，餐後搭山手線回高田馬場打包行李。",
+            time: "12:30 - 13:45",
+            title: "【午餐】らーめん 鴨to葱（上野御徒町）",
+            desc: "只用純鴨肉、蔥與水熬煮的清甜醬油拉麵，搭配入口即化鴨肉親子丼，飽足後可逛阿美橫丁藥妝。",
             highlight: true,
-            tagText: "徒步前往",
+            tagText: "御徒町步行",
             tagColor: "t-green"
+          },
+          {
+            time: "14:15 - 19:00",
+            title: "新宿 / 表參道室內百貨與旗艦店補貨",
+            desc: "補齊無印良品、UNIQLO、3COINS、新宿伊勢丹精品化妝品專櫃（免稅），並可先回高田馬場民宿放戰利品。",
+            highlight: true,
+            tagText: "JR山手線",
+            tagColor: "t-blue"
+          },
+          {
+            time: "19:30 - 21:15",
+            title: "【晚餐】山笑ふ 表參道店〔建議/已預約 19:30〕",
+            desc: "個人吧台專屬銅鍋極上黑毛和牛壽喜燒套餐，餐後步行至原宿搭山手線回高田馬場整理行李，準備明早出發富士山！",
+            highlight: true,
+            tagText: "地鐵/山手線",
+            tagColor: "t-yellow"
           }
         ]
       },
       5: {
-        title: "Day 5（11/19 週四）退房寄行李・市區利久牛舌・西松屋採買 ➔ 返台",
+        title: "Day 5（11/19 週四）06:55 富士山雙景點快閃 ➔ 利久牛舌 ➔ 20:25 返台",
         bannerColor: "bg-pink",
         items: [
           {
-            time: "09:30 - 10:30",
-            title: "民宿退房 ➔ 上野/日暮里寄存行李",
-            desc: "10:00 前退房，搭 JR 山手線至京成上野站或日暮里站大型置物櫃寄行李（可直接刷西瓜卡）。",
+            time: "06:00 - 06:45",
+            title: "高田馬場提前退房 ➔ 新宿站寄放行李",
+            desc: "06:00 退房搭 JR 山手線（4分）至新宿站，將大件行李箱鎖進新宿站南口/西口置物櫃，上樓至 Busta 新宿 4 樓候車。",
             highlight: false,
             tagText: "JR山手線",
             tagColor: "t-blue"
           },
           {
-            time: "11:00 - 12:45",
-            title: "【午餐】利久牛舌（市區彈性享用）",
-            desc: "首選上野 PARCO_ya 6F（或東京車站店），吃招牌「極」厚切炭烤牛舌定食配牛尾湯與麥飯。",
+            time: "06:55 - 08:30",
+            title: "【去程巴士】富士急高速巴士：新宿 ➔ 河口湖〔已訂票〕",
+            desc: "Busta 新宿南口準時發車（2號車 06C, 06D），車程 1 小時 35 分直達河口湖站。",
             highlight: true,
-            tagText: "上野步行",
+            tagText: "富士急高速巴士",
+            tagColor: "t-pink"
+          },
+          {
+            time: "08:30 - 08:55",
+            title: "【打卡 1】網紅羅森便利店 (Lawson 河口湖站前店)",
+            desc: "河口湖站出站過馬路即達，趁早晨光線清透拍攝藍白超商與雪頂富士山同框照。",
+            highlight: true,
+            tagText: "出站步行2分",
             tagColor: "t-green"
           },
           {
-            time: "12:45 - 14:45",
-            title: "上野御徒町採買：西松屋・MUJI・UNIQLO",
-            desc: "逛西松屋（上野御徒町/多慶屋周邊）、無印良品、UNIQLO 與阿美橫丁二木之菓子伴手禮。",
+            time: "09:00 - 11:30",
+            title: "【打卡 2】新倉山淺間公園（忠靈塔五重塔）",
+            desc: "河口湖站搭富士急行線（13分）至下吉田站，登 398 階梯拍「朱紅五重塔＋秋楓＋富士山」全景，11:15 搭電車回河口湖站。",
             highlight: true,
-            tagText: "上野商圈步行",
-            tagColor: "t-green"
+            tagText: "富士急行線",
+            tagColor: "t-blue"
           },
           {
-            time: "14:45 - 16:00",
-            title: "【彈性加碼】らーめん 鴨to葱",
-            desc: "避開中午排隊潮，來碗清甜純鴨湯拉麵與小鴨肉親子丼（若飽足可彈性改喝咖啡休息）。",
+            time: "11:30 - 12:55",
+            title: "河口湖站前熱食補給 ＆ 伴手禮採買",
+            desc: "享用山梨鄉土餺飥麵（Hoto）或採買富士山餅乾伴手禮，12:55 前務必回到河口湖站巴士乘車月台。",
             highlight: false,
-            tagText: "御徒町步行",
+            tagText: "河口湖站前",
+            tagColor: "t-yellow"
+          },
+          {
+            time: "13:10 - 14:55",
+            title: "【回程巴士】富士急高速巴士：河口湖 ➔ 新宿〔班次 1110-1〕",
+            desc: "13:10 河口湖站準時發車，預計 14:55 返抵 Busta 新宿高速巴士總站。",
+            highlight: true,
+            tagText: "富士急高速巴士",
+            tagColor: "t-pink"
+          },
+          {
+            time: "15:10 - 16:25",
+            title: "【午晚餐】炭燒牛舌 利久（新宿 LUMINE EST 7F）＆ 取行李",
+            desc: "下午離峰免排隊吃厚切炭烤牛舌定食，餐後至新宿站置物櫃取回大件行李箱。",
+            highlight: true,
+            tagText: "新宿東口步行",
             tagColor: "t-green"
           },
           {
-            time: "16:35 - 20:25",
-            title: "取行李搭京成 Skyliner ➔ 成田 T2 返台",
-            desc: "36 分鐘直達成田機場 T2，辦理台灣虎航 IT203（20:25 起飛）報到、把西瓜卡零頭花光、免稅店最後補貨！",
+            time: "16:38 - 20:25",
+            title: "JR 成田特快 N'EX ➔ 成田機場 T2 搭機返台",
+            desc: "全車指定席直達 T2（17:58 抵達），辦理台灣虎航 IT203（20:25 起飛）托運、花光 Suica 餘額，23:25 抵達桃園 T1！",
             highlight: true,
-            tagText: "京成Skyliner",
+            tagText: "成田特快 N'EX",
             tagColor: "t-blue"
           }
         ]
@@ -1891,23 +2188,78 @@
     };
 
     /* =========================================
-       2. 預設出發前待辦清單
+       2. 預設隨身票券夾資料 (可上傳手機 QR Code 截圖)
     ========================================= */
-    const DEFAULT_TODOS = [
-      { id: "td-1", text: "【已預約】Day 1 7-11 高田馬場4丁目南店 ecbo cloak 行李寄存" },
-      { id: "td-2", text: "【已預約】Day 4 21:30 肉男 MEAT MAN（澀谷店）晚餐" },
-      { id: "td-3", text: "【9/16 13:00】搶訂 Day 2 東京海洋迪士尼門票（下載官方 App 綁定信用卡）" },
-      { id: "td-4", text: "【9/30 23:00】TableCheck 搶訂 Day 1 20:30 牛たん 檸檬（新宿本店）" },
-      { id: "td-5", text: "【10月中旬】預訂 Day 3 19:30 山笑ふ 表參道店（個人和牛壽喜燒）" },
-      { id: "td-6", text: "【10/31 23:00】Webket 搶訂 Day 3 16:20/16:40 SHIBUYA SKY 夕陽場次" },
-      { id: "td-7", text: "線上預購京成電鐵 Skyliner 來回票 ＆ Tokyo Subway 24 小時券（¥800）" },
-      { id: "td-8", text: "預訂 Day 4 Klook 富士山 10 小時專車一日遊（選擇新宿西口集合）" },
-      { id: "td-9", text: "線上填寫 Visit Japan Web（截圖入境審查＋海關申報 QR Code）" },
-      { id: "td-10", text: "iPhone Apple 錢包加入數位 Suica 並儲值約 ¥5,000 – ¥6,000 日圓" }
+    const DEFAULT_TICKETS = [
+      {
+        id: "tk-default-1",
+        day: "Day 1 (11/15)",
+        color: "bg-blue",
+        title: "🛫 酷航 TR866 去程機票",
+        note: "06:50 桃園 T1 ➔ 10:55 成田 T1｜訂位代號：G915PP",
+        url: "",
+        imageData: "",
+        isDefault: true
+      },
+      {
+        id: "tk-default-2",
+        day: "Day 1 (11/15)",
+        color: "bg-green",
+        title: "🧳 7-11 高田馬場4丁目南店寄存",
+        note: "ecbo cloak 行李寄存預約（12:40 寄放 / 16:45 領取）",
+        url: "https://cloak.ecbo.io/",
+        imageData: "",
+        isDefault: true
+      },
+      {
+        id: "tk-default-3",
+        day: "Day 5 (11/19)",
+        color: "bg-pink",
+        title: "🚌 富士急巴士去程（已訂票）",
+        note: "06:55 バスタ新宿（南口）➔ 08:30 河口湖駅｜2號車 06C, 06D",
+        url: "",
+        imageData: "",
+        isDefault: true
+      },
+      {
+        id: "tk-default-4",
+        day: "Day 5 (11/19)",
+        color: "bg-yellow",
+        title: "🚌 富士急巴士回程（班次 1110-1）",
+        note: "13:10 河口湖站 ➔ 14:55 Busta 新宿高速巴士總站",
+        url: "",
+        imageData: "",
+        isDefault: true
+      },
+      {
+        id: "tk-default-5",
+        day: "Day 5 (11/19)",
+        color: "bg-pink",
+        title: "🛬 台灣虎航 IT203 回程機票",
+        note: "20:25 成田 T2 ➔ 23:25 桃園 T1｜訂位代號：BC9M6H",
+        url: "",
+        imageData: "",
+        isDefault: true
+      }
     ];
 
     /* =========================================
-       3. 預設 11 月秋日東京行李清單
+       3. 預設出發前待辦清單
+    ========================================= */
+    const DEFAULT_TODOS = [
+      { id: "td-1", text: "【已預約】Day 1 7-11 高田馬場4丁目南店 ecbo cloak 行李寄存" },
+      { id: "td-2", text: "【已預約】Day 1 20:30 牛たん 檸檬（新宿本店）晚餐" },
+      { id: "td-3", text: "【已預約】Day 3 21:30 肉男 MEAT MAN（澀谷店）晚餐" },
+      { id: "td-4", text: "【確認訂位】Day 4 19:30 山笑ふ 表參道店（個人和牛壽喜燒）" },
+      { id: "td-5", text: "【確認車票】Day 5 富士急巴士去程 06:55（已訂）＆ 回程 13:10（班次 1110-1）" },
+      { id: "td-6", text: "購買京成 Skyliner「成田出發單程票」（NT$427，QR Code 存手機）" },
+      { id: "td-7", text: "確認 Day 2 東京海洋迪士尼門票 ＆ Day 3 SHIBUYA SKY 夕陽門票憑證" },
+      { id: "td-8", text: "線上填寫 Visit Japan Web（截圖入境審查＋海關申報 QR Code）" },
+      { id: "td-9", text: "iPhone Apple 錢包加入數位 Suica 並儲值約 ¥5,000 – ¥6,000 日圓" }
+    ];
+
+    /* =========================================
+       4. 預設 11 月秋日東京行李清單
     ========================================= */
     const DEFAULT_PACKING = [
       {
@@ -1915,7 +2267,7 @@
         color: "bg-pink",
         items: [
           { id: "pk-1", text: "護照正本（確認效期 6 個月以上，每日隨身攜帶辦退稅）" },
-          { id: "pk-2", text: "台灣身分證、電子機票 ＆ 住宿／ecbo cloak 憑證離線截圖" },
+          { id: "pk-2", text: "台灣身分證、電子機票 ＆ 住宿／ecbo cloak／巴士憑證離線截圖" },
           { id: "pk-3", text: "日幣現鈔（約 ¥25,000–35,000，小網神社洗錢母＆築地小吃用）" },
           { id: "pk-4", text: "高回饋海外刷卡信用卡 2 張（Sweet Check / AFURI 全無現金）" },
           { id: "pk-5", text: "日本上網 eSIM 設定檔 / 取卡針" }
@@ -1929,14 +2281,14 @@
           { id: "pk-7", text: "薄長袖 / 針織衫 4–5 件（室內暖氣強，方便洋蔥式穿脫）" },
           { id: "pk-8", text: "發熱衣 2–3 件 ＆ 貼身衣物、厚棉襪" },
           { id: "pk-9", text: "好走的防滑球鞋（日均兩萬步，切勿穿全新未磨合鞋款）" },
-          { id: "pk-10", text: "圍巾 / 毛帽 ＆ 輕便折疊晴雨傘" }
+          { id: "pk-10", text: "圍巾 / 毛帽 ＆ 輕便折疊晴雨傘（Day 4 雨天備用）" }
         ]
       },
       {
         category: "🔌 3C 充電與購物實用小物",
         color: "bg-blue",
         items: [
-          { id: "pk-11", text: "大容量折疊購物袋 2 個（逛 UNIQLO / 3COINS / 西松屋 / 藥妝必備）" },
+          { id: "pk-11", text: "大容量折疊購物袋 2 個（逛 UNIQLO / 無印良品 / 西松屋 / 3COINS 必備）" },
           { id: "pk-12", text: "護照夾（隨時方便出示辦理 10% 免稅）" },
           { id: "pk-13", text: "行動電源（務必隨身帶上飛機，嚴禁託運！）＆ 快充線" },
           { id: "pk-14", text: "保溫瓶（裝溫熱水帶入迪士尼園區補水最省錢）" },
@@ -1946,9 +2298,9 @@
     ];
 
     /* =========================================
-       4. LocalStorage 狀態管理
+       5. LocalStorage 狀態管理 (v3 含票券夾與最新行程)
     ========================================= */
-    const STORAGE_KEY = "tokyo_2026_editable_notebook_v2";
+    const STORAGE_KEY = "tokyo_2026_editable_notebook_v3";
 
     function deepClone(obj) {
       return JSON.parse(JSON.stringify(obj));
@@ -1961,6 +2313,7 @@
           const parsed = JSON.parse(raw);
           return {
             itinerary: parsed.itinerary || deepClone(DEFAULT_ITINERARY),
+            tickets: parsed.tickets || deepClone(DEFAULT_TICKETS),
             checkedIds: parsed.checkedIds || {},
             customTodos: parsed.customTodos || [],
             customPackItems: parsed.customPackItems || []
@@ -1971,6 +2324,7 @@
       }
       return {
         itinerary: deepClone(DEFAULT_ITINERARY),
+        tickets: deepClone(DEFAULT_TICKETS),
         checkedIds: {},
         customTodos: [],
         customPackItems: []
@@ -1980,8 +2334,11 @@
     function saveState() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+        return true;
       } catch (e) {
-        console.warn("寫入儲存資料失敗", e);
+        console.warn("寫入儲存資料失敗（可能圖片容量過大）", e);
+        showToast("⚠️ 儲存空間已滿，請刪除舊截圖後再試");
+        return false;
       }
     }
 
@@ -1991,7 +2348,7 @@
     let isMotionReduced = false;
 
     /* =========================================
-       5. 動態效果開關與出發倒數計時器
+       6. 動態效果開關與出發倒數計時器
     ========================================= */
     function toggleMotion() {
       isMotionReduced = !isMotionReduced;
@@ -2218,11 +2575,194 @@
       saveState();
       closeResetConfirmModal();
       renderItinerary(true);
-      showToast("已還原為預設 5 天行程 ↺");
+      showToast("已還原為最新 5 天預設行程 ↺");
     }
 
     /* =========================================
-       7. 可打勾清單渲染與互動 (出發前待辦 + 行李清單)
+       8. 隨身票券夾與 QR Code 截圖壓縮上傳
+    ========================================= */
+    function renderTickets() {
+      const grid = document.getElementById("ticket-wallet-grid");
+      const list = appState.tickets || [];
+
+      grid.innerHTML = list.map((tk, idx) => {
+        const thumbHtml = tk.imageData
+          ? `
+            <div class="ticket-thumb-wrap" onclick="openQrLightbox(${idx})" title="點擊全螢幕放大 QR Code">
+              <img src="${tk.imageData}" alt="${escapeHtml(tk.title)}" />
+              <span class="ticket-thumb-hint">🔍 點擊放大掃碼</span>
+            </div>
+          `
+          : "";
+
+        const zoomBtnHtml = tk.imageData
+          ? `<button type="button" class="ticket-btn t-zoom" onclick="openQrLightbox(${idx})">🔍 放大亮碼</button>`
+          : `<button type="button" class="ticket-btn" onclick="attachImageToTicket(${idx})">📷 補傳截圖</button>`;
+
+        const linkBtnHtml = tk.url
+          ? `<a href="${escapeHtml(tk.url)}" target="_blank" rel="noopener noreferrer" class="ticket-btn t-link">🔗 開啟訂單</a>`
+          : "";
+
+        const delBtnHtml = !tk.isDefault
+          ? `<button type="button" class="ticket-btn t-del" onclick="deleteTicket(${idx})">🗑️ 刪除</button>`
+          : "";
+
+        return `
+          <article class="ticket-card">
+            <div class="ticket-head ${tk.color || "bg-blue"}">
+              <span>🎫 ${escapeHtml(tk.day || "隨身憑證")}</span>
+              <span>PASS</span>
+            </div>
+            <div class="ticket-body">
+              <h3 class="ticket-title">${escapeHtml(tk.title)}</h3>
+              <p class="ticket-note">${escapeHtml(tk.note || "")}</p>
+              ${thumbHtml}
+            </div>
+            <div class="ticket-foot">
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                ${zoomBtnHtml}
+                ${linkBtnHtml}
+              </div>
+              ${delBtnHtml}
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    let attachingTicketIndex = -1;
+
+    function openTicketModal() {
+      attachingTicketIndex = -1;
+      document.getElementById("ticket-modal-title").textContent = "🎫 新增票券 / QR Code 截圖";
+      document.getElementById("tk-title").value = "";
+      document.getElementById("tk-day").value = "Day 2 (11/16)";
+      document.getElementById("tk-color").value = "bg-blue";
+      document.getElementById("tk-note").value = "";
+      document.getElementById("tk-url").value = "";
+      document.getElementById("tk-image").value = "";
+      document.getElementById("ticket-modal").classList.add("open");
+    }
+
+    function attachImageToTicket(index) {
+      attachingTicketIndex = index;
+      const tk = appState.tickets[index];
+      document.getElementById("ticket-modal-title").textContent = "📷 為此票券補傳 QR Code 截圖";
+      document.getElementById("tk-title").value = tk.title;
+      document.getElementById("tk-day").value = tk.day || "";
+      document.getElementById("tk-color").value = tk.color || "bg-blue";
+      document.getElementById("tk-note").value = tk.note || "";
+      document.getElementById("tk-url").value = tk.url || "";
+      document.getElementById("tk-image").value = "";
+      document.getElementById("ticket-modal").classList.add("open");
+    }
+
+    function closeTicketModal() {
+      document.getElementById("ticket-modal").classList.remove("open");
+    }
+
+    // 使用 Canvas 自動壓縮手機截圖，確保 QR Code 清晰且不超出 localStorage 容量
+    function compressImageFile(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const maxDim = 960;
+            let w = img.width;
+            let h = img.height;
+            if (w > maxDim || h > maxDim) {
+              if (w > h) {
+                h = Math.round((h * maxDim) / w);
+                w = maxDim;
+              } else {
+                w = Math.round((w * maxDim) / h);
+                h = maxDim;
+              }
+            }
+            const canvas = document.createElement("canvas");
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext("2d");
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(0, 0, w, h);
+            ctx.drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL("image/jpeg", 0.78));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function saveTicketForm(event) {
+      event.preventDefault();
+      const submitBtn = document.getElementById("tk-submit-btn");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "處理圖片中...";
+
+      try {
+        const fileInput = document.getElementById("tk-image");
+        let imageData = "";
+        if (fileInput.files && fileInput.files[0]) {
+          imageData = await compressImageFile(fileInput.files[0]);
+        } else if (attachingTicketIndex >= 0) {
+          imageData = appState.tickets[attachingTicketIndex].imageData || "";
+        }
+
+        const ticketObj = {
+          id: attachingTicketIndex >= 0 ? appState.tickets[attachingTicketIndex].id : "tk-custom-" + Date.now(),
+          title: document.getElementById("tk-title").value.trim(),
+          day: document.getElementById("tk-day").value.trim(),
+          color: document.getElementById("tk-color").value,
+          note: document.getElementById("tk-note").value.trim(),
+          url: document.getElementById("tk-url").value.trim(),
+          imageData: imageData,
+          isDefault: attachingTicketIndex >= 0 ? !!appState.tickets[attachingTicketIndex].isDefault : false
+        };
+
+        if (attachingTicketIndex >= 0) {
+          appState.tickets[attachingTicketIndex] = ticketObj;
+        } else {
+          appState.tickets.push(ticketObj);
+        }
+
+        if (saveState()) {
+          closeTicketModal();
+          renderTickets();
+          showToast("票券已存入隨身票券夾 🎫");
+        }
+      } catch (err) {
+        showToast("圖片讀取失敗，請換一張截圖試試");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "儲存至票券夾 🎫";
+      }
+    }
+
+    function deleteTicket(index) {
+      appState.tickets.splice(index, 1);
+      saveState();
+      renderTickets();
+      showToast("已刪除自訂票券");
+    }
+
+    function openQrLightbox(index) {
+      const tk = appState.tickets[index];
+      if (!tk || !tk.imageData) return;
+      document.getElementById("qr-lightbox-title").textContent = tk.title;
+      document.getElementById("qr-lightbox-img").src = tk.imageData;
+      document.getElementById("qr-lightbox").classList.add("open");
+    }
+
+    function closeQrLightbox() {
+      document.getElementById("qr-lightbox").classList.remove("open");
+    }
+
+    /* =========================================
+       9. 可打勾清單渲染與互動 (出發前待辦 + 行李清單)
     ========================================= */
     function renderCheckIcon(isChecked) {
       if (!isChecked) return "";
@@ -2412,12 +2952,13 @@
     }
 
     /* =========================================
-       9. 頁面初始化
+       11. 頁面初始化
     ========================================= */
     window.addEventListener("DOMContentLoaded", () => {
       updateCountdown();
       setInterval(updateCountdown, 1000);
       switchDay(1);
+      renderTickets();
       renderTodos();
       renderPacking();
     });
